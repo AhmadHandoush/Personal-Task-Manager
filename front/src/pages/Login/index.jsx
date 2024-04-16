@@ -1,19 +1,57 @@
 import { Link } from "react-router-dom";
 import "../Login/login.css";
-
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 function Login() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/login",
+        formData
+      );
+
+      console.log("Signup successful:", response.data);
+      navigate("/home");
+    } catch (error) {
+      console.error("Error signing up:", error.message);
+    }
+  };
   return (
     <div className="login flex">
       <div className="login-card">
         <div className="imge flex-center">
           <h2>Login</h2>
         </div>
-        <form className="flex column ">
+        <form className="flex column " onSubmit={handleSubmit}>
           <div>
-            <input type="email" name="email" placeholder="Email..." />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email..."
+              value={formData.email}
+              onChange={handleChange}
+            />
           </div>
           <div>
-            <input type="password" name="password" placeholder="Password" />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+            />
           </div>
           <button type="submit">Login</button>
         </form>
