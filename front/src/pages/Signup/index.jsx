@@ -20,7 +20,7 @@ function Signup() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/signup",
+        "http://localhost:3001/register",
         formData
       );
 
