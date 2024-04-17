@@ -1,20 +1,8 @@
 const express = require("express");
-const {
-  createBoard,
-  getBoards,
-  updateBoard,
-  deleteBoard,
-  getBoardDetails,
-} = require("../controllers/boardController");
-const { protect } = require("../middlewares/authMiddleware");
+const { createBoard, getBoards } = require("../controllers/boardController");
 const router = express.Router();
 
-router.route("/").post(protect, createBoard).get(protect, getBoards);
-
-router
-  .route("/:boardId")
-  .get(protect, getBoardDetails)
-  .put(protect, updateBoard)
-  .delete(protect, deleteBoard);
+router.post("/", createBoard);
+router.get("/", getBoards);
 
 module.exports = router;
