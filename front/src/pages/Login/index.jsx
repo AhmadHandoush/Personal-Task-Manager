@@ -22,10 +22,12 @@ function Login() {
         formData
       );
 
-      console.log("Signup successful:", response.data);
-      navigate("/home");
+      console.log("login successful:", response.data);
+      if (response.data.status === "Success") {
+        navigate("/home");
+      }
     } catch (error) {
-      console.error("Error signing up:", error.message);
+      console.error("Error login:", error.message);
     }
   };
   return (
