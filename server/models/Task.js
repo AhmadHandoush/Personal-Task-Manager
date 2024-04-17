@@ -6,3 +6,7 @@ const TaskSchema = new mongoose.Schema({
   tags: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tag" }],
   attachments: [String],
 });
+const ColumnSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  tasks: [TaskSchema],
+});
